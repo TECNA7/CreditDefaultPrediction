@@ -1,0 +1,130 @@
+# Lab Notebook - Credit Default Prediction Project
+# Ruth Tilahun & Kripa Lamichhane
+
+Ruth: 11-11-24 (1.5hrs)
+* downloaded credit card default dataset from UCI repository
+* explored data structure, 30000 examples with 23 features
+* identified continuous vs categorical features
+* noted that payment status uses codes -2 to 8
+
+Kripa: 11-12-24 (2hrs)
+* set up project repository on github
+* created initial file structure
+* started reading about naive bayes for mixed feature types
+* read Yeh & Lien paper on credit default prediction
+* found they used neural networks, getting ideas for comparison
+
+Ruth: 11-14-24 (2hrs)
+* wrote data loading and preprocessing code
+* split data into train/test (80/20)
+* noticed class imbalance - about 22% defaults
+* considered using stratified sampling
+
+Kripa: 11-16-24 (3hrs)
+* started implementing logistic regression from scratch
+* wrote sigmoid function and gradient descent
+* having issues with convergence, need to debug
+* tried different learning rates
+* batch gradient descent too slow on full dataset
+
+Ruth: 11-18-24 (2hrs)
+* began Mixed_NB.py implementation
+* gaussian for continuous, multinomial for categorical
+* laplace smoothing added
+* tested log probabilities to avoid underflow
+
+Kripa: 11-19-24 (2hrs)
+* fixed logistic regression - was missing feature scaling
+* added mini-batch SGD for faster training
+* now converges properly
+* experimented with batch sizes 64, 128, 256
+
+Ruth: 11-21-24 (1.5hrs)
+* finished Mixed_NB classifier
+* tested on small subset, seems to work
+* need to add predict_proba method
+* accuracy around 73% on test set
+* confusion matrix shows many false negatives
+
+Kripa: 11-23-24 (2hrs)
+* added evaluation metrics to logistic regression
+* confusion matrix, precision, recall, f1
+* compared with sklearn implementation - results match
+
+Ruth: 11-25-24 (2hrs)
+* started Discretized_NB implementation
+* discretizing continuous features into bins
+* trying quantile vs uniform binning strategies
+* quantile seems better for skewed distributions like LIMIT_BAL
+
+Kripa: 11-26-24 (1.5hrs)
+* wrote ROC curve plotting code
+* AUC calculation working
+* logistic regression getting around 0.72 AUC
+* naive bayes around 0.73 AUC surprisingly
+
+Ruth: 11-28-24 (2hrs)
+* finished discretized naive bayes
+* tested different bin sizes (5, 10, 15, 20)
+* 5 bins seems to work best
+* too many bins causes overfitting
+
+Kripa: 12-01-24 (2hrs)
+* created main.py to run full comparison
+* both models running end to end
+* naive bayes slightly worse than logistic regression
+* sklearn LR matches our implementation closely
+
+Ruth: 12-02-24 (1.5hrs)
+* added feature importance analysis
+* information gain calculation
+* payment status features most important
+* PAY_0 (most recent month) is top predictor
+
+Kripa: 12-03-24 (2hrs)
+* compared our implementations with sklearn
+* results are very close
+* wrote run_NB.py for naive bayes comparisons
+* tested GaussianNB, CategoricalNB, MultinomialNB from sklearn
+* our mixed NB performs similarly to sklearn versions
+
+Ruth: 12-05-24 (2hrs)
+* renamed features for better interpretability
+* created rename_features.py utility
+* PAY_0 -> Pay_Status_Sep etc
+* makes plots much easier to understand
+
+Kripa: 12-06-24 (1.5hrs)
+* feature ablation analysis for naive bayes
+* demographic features (gender, education) have low importance
+* good for fairness
+* removing gender barely changes AUC
+
+Ruth: 12-08-24 (2hrs)
+* cleaned up all code files
+* simplified comments and removed extra logging
+* prepared for final submission
+* tested all scripts run without errors
+* removed unused imports
+
+Kripa: 12-09-24 (3hrs)
+* created presentation slides
+* made figures for ROC curves and confusion matrices
+* practiced presentation timing
+* added slide on fairness findings
+* timing is about 7 minutes
+
+Ruth: 12-10-24 (2hrs)
+* final testing of all scripts
+* fixed minor bugs in feature_importance.py
+* reviewed presentation with kripa
+* adjusted slide order for better flow
+
+Kripa: 12-11-24 (1hr)
+* final cleanup of repository
+* updated readme
+* submitted final code
+
+# References
+* Yeh, I-Cheng. "Default of Credit Card Clients." UCI Machine Learning Repository, 2009. https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients
+* Yeh, I-Cheng and Che-hui Lien. "The comparisons of data mining techniques for the predictive accuracy of probability of default of credit card clients." Expert Syst. Appl. 36 (2009): 2473-2480.
